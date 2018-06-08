@@ -1,0 +1,14 @@
+#!/bin/bash
+
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+project_dir="$( cd "${script_dir}/.." && pwd)"
+build_dir="${project_dir}/build"
+
+mkdir -p "${build_dir}"
+
+cd "${build_dir}"
+cmake -G Ninja "${project_dir}"
+
+cd "${project_dir}"
+cmake --build "${build_dir}"
+
