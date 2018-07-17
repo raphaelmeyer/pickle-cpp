@@ -7,7 +7,7 @@ build_dir="${project_dir}/build"
 mkdir -p "${build_dir}"
 
 cd "${build_dir}"
-cmake -G Ninja "${project_dir}"
+cmake -G Ninja "${project_dir}" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 
 cd "${project_dir}"
 cmake --build "${build_dir}"
