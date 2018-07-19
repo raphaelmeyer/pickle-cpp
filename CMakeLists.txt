@@ -3,4 +3,5 @@ project(PickleCpp VERSION 0.0.1 LANGUAGES CXX)
 
 add_subdirectory(pickle-cpp)
 add_subdirectory(pickle-runner)
+add_subdirectory(vendor)
 
