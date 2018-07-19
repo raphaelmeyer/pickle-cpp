@@ -1,0 +1,9 @@
+#!/bin/bash
+
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source_dir=${script_dir}/..
+
+docker volume create workspace
+docker run --rm -t --mount source=workspace,target=/workspace --mount type=bind,source=${source_dir},target=/source,readonly -w /workspace raphaelmeyer/arch-clang-ninja:1.0.0 cmake -G Ninja /source
+docker run --rm -t --mount source=workspace,target=/workspace --mount type=bind,source=${source_dir},target=/source,readonly raphaelmeyer/arch-clang-ninja:1.0.0 cmake --build /workspace 
+
