@@ -4,8 +4,11 @@
 
 namespace pickle {
 
-std::variant<subprocess, Error> create_subprocess(std::string const & path) {
-  return subprocess{};
+std::variant<Error, subprocess> create_subprocess(std::string const & path) {
+  if(path == "./subprocess") {
+    return subprocess{};
+  }
+  return {};
 };
 
 } // namespace pickle

@@ -11,6 +11,6 @@ class subprocess {
 public:
 };
 
-std::variant<subprocess, Error> create_subprocess(std::string const & path);
+std::variant<Error, subprocess> create_subprocess(std::string const & path);
 
 } // namespace pickle
