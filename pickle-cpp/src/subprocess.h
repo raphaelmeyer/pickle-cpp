@@ -7,10 +7,10 @@ namespace pickle {
 
 struct Error;
 
-class subprocess {
+class Subprocess {
 public:
 };
 
-std::variant<Error, subprocess> create_subprocess(std::string const & path);
+std::variant<Error, Subprocess> create_subprocess(std::string const & path);
 
 } // namespace pickle
