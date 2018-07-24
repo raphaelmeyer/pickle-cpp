@@ -4,8 +4,7 @@
 
 namespace pickle {
 
-struct Error
-{
+struct Error {
   std::string const what;
 };
 

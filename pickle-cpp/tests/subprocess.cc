@@ -1,7 +1,7 @@
 #include <catch2/catch.hpp>
 
-#include "subprocess.h"
 #include "error.h"
+#include "subprocess.h"
 
 TEST_CASE("create_subprocess should return an object to interact with the subprocess", "subprocess") {
   auto result = pickle::create_subprocess("./subprocess");

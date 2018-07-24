@@ -12,10 +12,10 @@ int main() {
     return 1;
   }
 
-  std::string const start{R"json({ "type": "start", "featuresConfig": { "filters": { "tagExpression": "" }, "order": {} }, "runtimeConfig": { "maxParallel": 1 }, "supportCodeConfig": {}, "stepDefinitions": [] }
+  std::string const start{
+    R"json({ "type": "start", "featuresConfig": { "filters": { "tagExpression": "" }, "order": {} }, "runtimeConfig": { "maxParallel": 1 }, "supportCodeConfig": {}, "stepDefinitions": [] }
 )json"};
 
   auto & engine = std::get<std::iostream>(result);
   engine << start << std::endl;
 }
-

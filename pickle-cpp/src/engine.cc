@@ -8,8 +8,7 @@
 
 namespace pickle {
 
-std::variant<std::iostream, Error> start_engine()
-{
+std::variant<std::iostream, Error> start_engine() {
   char const * path{"../cucumber-pickle-runner"};
   char name[]{"cucumber-pickle-runner"};
   char flag[]{"--debug"};

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+project_dir="$( cd "${script_dir}/.." && pwd)"
+
+find "${project_dir}/pickle-cpp/" -name "*.cc" -print0 | xargs -0 clang-format -i
+find "${project_dir}/pickle-cpp/" -name "*.h" -print0 | xargs -0 clang-format -i
+
