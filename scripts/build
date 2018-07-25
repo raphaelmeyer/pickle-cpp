@@ -6,9 +6,6 @@ build_dir="${project_dir}/build"
 
 mkdir -p "${build_dir}"
 
-cd "${project_dir}"
-bundler install --path "${build_dir}"
-
 cd "${build_dir}"
 cmake -G Ninja "${project_dir}" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 
