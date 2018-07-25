@@ -2,7 +2,12 @@
 
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 project_dir="$( cd "${script_dir}/.." && pwd)"
-build_dir="${project_dir}/build"
+
+if [[ -z "${BUILD_DIR}" ]]; then
+  build_dir="${project_dir}/build"
+else
+  build_dir="${BUILD_DIR}"
+fi
 
 mkdir -p "${build_dir}"
 
@@ -11,4 +16,3 @@ cmake -G Ninja "${project_dir}" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=cl
 
 cd "${project_dir}"
 cmake --build "${build_dir}"
-
