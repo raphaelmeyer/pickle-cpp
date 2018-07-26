@@ -1,5 +1,5 @@
 # TODO list
 
-- set up "test input" pickle-cpp executable
-- describe behaviour for "test input" executable
-
+- set up wip/done for pickle-cpp features
+- make first pickle-cpp feature failing again
+- then make first pickle-cpp feature passing again
