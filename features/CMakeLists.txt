@@ -16,3 +16,10 @@ add_custom_command(
   )
 
 
+add_executable(example-pickle
+  example-pickle/main.cc
+  )
+
+target_link_libraries(example-pickle
+  PRIVATE pickle-cpp
+  )

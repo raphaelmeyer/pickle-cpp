@@ -1,12 +1,18 @@
 add_library(pickle-cpp
   src/engine.cc
   src/subprocess.cc
+  src/cucumber.cc
+  src/pickle.cc
   )
 
 target_compile_features(pickle-cpp PRIVATE cxx_std_17)
 
 target_link_libraries(pickle-cpp
   PRIVATE nlohmann::json
+  )
+
+target_include_directories(pickle-cpp
+  PUBLIC include
   )
 
 
