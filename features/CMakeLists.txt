@@ -1,7 +1,8 @@
 
 add_custom_target(run-features ALL
-  COMMAND bundler exec cucumber --version
-  DEPENDS cucumber-ruby)
+  COMMAND bundler exec cucumber --require ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}
+  DEPENDS cucumber-ruby example-pickle
+  )
 
 add_custom_target(cucumber-ruby
   COMMAND bundler install --path gems

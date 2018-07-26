@@ -8,7 +8,7 @@ int main() {
     pickle.pending();
   });
 
-  When("a succeeding step", [](Pickle const & pickle){
+  When("a passing step", [](Pickle const & pickle){
     pickle.assert(true);
   });
 
