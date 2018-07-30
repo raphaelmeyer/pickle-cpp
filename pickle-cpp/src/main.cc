@@ -1,3 +1,5 @@
+// This is a spike, can be removed as soon as its insights are transformed into tests
+
 #include "engine.h"
 #include "error.h"
 

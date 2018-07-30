@@ -3,6 +3,7 @@ add_library(pickle-cpp
   src/subprocess.cc
   src/cucumber.cc
   src/pickle.cc
+  src/runner.cc
   )
 
 target_compile_features(pickle-cpp PRIVATE cxx_std_17)
@@ -19,6 +20,7 @@ target_include_directories(pickle-cpp
 add_executable(pickle-cpp-tests
   tests/main.cc
   tests/subprocess.cc
+  tests/runner.cc
   )
 
 target_compile_features(pickle-cpp-tests PRIVATE cxx_std_17)
@@ -35,6 +37,7 @@ target_include_directories(pickle-cpp-tests
 add_custom_target(run-pickle-cpp-tests ALL COMMAND pickle-cpp-tests)
 
 
+# This is a spike, can be removed as soon as its insights are transformed into tests
 add_executable(pickle-cpp-exe
   src/main.cc
   )

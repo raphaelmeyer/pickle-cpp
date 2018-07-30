@@ -16,4 +16,5 @@ int main() {
     pickle.fail();
   });
 
+  run();
 }
