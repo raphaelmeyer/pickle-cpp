@@ -1,6 +1,6 @@
 
 add_custom_target(run-features ALL
-  COMMAND bundler exec cucumber --require ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}
+  COMMAND bundler exec cucumber --require ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} --wip --tags @wip:2
   DEPENDS cucumber-ruby example-pickle
   )
 
