@@ -34,7 +34,15 @@ target_include_directories(pickle-cpp-tests
   PRIVATE src
   )
 
-add_custom_target(run-pickle-cpp-tests ALL COMMAND pickle-cpp-tests)
+add_custom_target(run-pickle-cpp-tests ALL
+  COMMAND pickle-cpp-tests
+  DEPENDS subprocess_stub
+  )
+
+add_executable(subprocess_stub
+  tests/subprocess_stub.cc
+  )
+
 
 
 # This is a spike, can be removed as soon as its insights are transformed into tests

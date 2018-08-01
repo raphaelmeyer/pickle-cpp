@@ -16,7 +16,7 @@ void run() {
   auto result = pickle::create_subprocess("[...]/cucumber-pickle-runner");
   auto subprocess = std::get<pickle::Subprocess>(result);
 
-  auto & get_runner().run(subprocess);
+  pickle::get_runner().run(subprocess);
   */
 }
 
