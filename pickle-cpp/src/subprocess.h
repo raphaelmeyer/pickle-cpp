@@ -10,6 +10,8 @@ struct Error;
 
 class Subprocess {
 public:
+  Subprocess(pid_t child, int to, int from) {}
+
   std::iostream & io();
 
 private:

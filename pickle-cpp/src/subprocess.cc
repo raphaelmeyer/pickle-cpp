@@ -17,7 +17,12 @@ std::variant<Error, Subprocess> create_subprocess(std::string const & path) {
   auto name = path;
   char * const args[]{name.data(), nullptr, nullptr};
 
-  int error_chanel[2];
+  int to[2];
+  int from[2];
+  ::pipe(to);
+  ::pipe(from);
+
+    int error_chanel[2];
   ::pipe(error_chanel);
   ::fcntl(error_chanel[1], F_SETFD, fcntl(error_chanel[1], F_GETFD) | FD_CLOEXEC);
 
@@ -27,11 +32,20 @@ std::variant<Error, Subprocess> create_subprocess(std::string const & path) {
   }
 
   if(pid == 0) {
+    ::dup2(to[0], STDIN_FILENO);
+    ::dup2(from[1], STDOUT_FILENO);
+
+    ::close(to[1]);
+    ::close(from[0]);
+
     ::close(error_chanel[0]);
     ::execv(path.data(), args);
     ::write(error_chanel[1], &errno, sizeof(int));
     std::exit(1);
   }
+
+  ::close(to[0]);
+  ::close(from[1]);
 
   ::close(error_chanel[1]);
   do {
@@ -43,7 +57,7 @@ std::variant<Error, Subprocess> create_subprocess(std::string const & path) {
   } while(errno == EAGAIN || errno == EINTR);
   ::close(error_chanel[0]);
 
-  return Subprocess{};
+  return Subprocess{pid, to[1], from[0]};
 };
 
 } // namespace pickle

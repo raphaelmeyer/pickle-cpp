@@ -4,6 +4,7 @@ add_library(pickle-cpp
   src/cucumber.cc
   src/pickle.cc
   src/runner.cc
+  src/pipestream.cc
   )
 
 target_compile_features(pickle-cpp PRIVATE cxx_std_17)
@@ -21,6 +22,7 @@ add_executable(pickle-cpp-tests
   tests/main.cc
   tests/subprocess.cc
   tests/runner.cc
+  tests/pipestream.cc
   )
 
 target_compile_features(pickle-cpp-tests PRIVATE cxx_std_17)
