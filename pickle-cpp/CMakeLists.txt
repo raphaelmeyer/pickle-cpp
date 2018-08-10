@@ -1,3 +1,5 @@
+find_package(Threads)
+
 add_library(pickle-cpp
   src/engine.cc
   src/subprocess.cc
@@ -30,6 +32,7 @@ target_compile_features(pickle-cpp-tests PRIVATE cxx_std_17)
 target_link_libraries(pickle-cpp-tests
   PRIVATE pickle-cpp
   PRIVATE catchorg::catch2
+  PRIVATE Threads::Threads
   )
 
 target_include_directories(pickle-cpp-tests

@@ -1,5 +1,5 @@
 # TODO list
 
-- enable pipe stream test
+- read from pipe
 - enable next subprocess test
 
