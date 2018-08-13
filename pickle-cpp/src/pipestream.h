@@ -7,7 +7,7 @@ namespace pickle {
 
 class PipeStreamBuf : public std::streambuf {
 public:
-  PipeStreamBuf(int in);
+  PipeStreamBuf(int in, int out);
   virtual ~PipeStreamBuf();
 
 protected:
@@ -18,7 +18,9 @@ protected:
 private:
   constexpr static std::size_t _size = 256;
   std::array<char_type, _size> _buffer;
+  std::array<char_type, _size> _read_buffer;
   int _in;
+  int _out;
 };
 
 class PipeStream : public std::iostream {
