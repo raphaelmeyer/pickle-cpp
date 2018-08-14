@@ -8,11 +8,12 @@ add_library(pickle-cpp
   src/runner.cc
   src/pipestream.cc
   )
-
-target_compile_features(pickle-cpp PRIVATE cxx_std_17)
+add_library(pickle::cpp ALIAS pickle-cpp)
 
 target_link_libraries(pickle-cpp
-  PRIVATE nlohmann::json
+  PRIVATE
+    pickle::settings
+    nlohmann::json
   )
 
 target_include_directories(pickle-cpp
@@ -27,12 +28,12 @@ add_executable(pickle-cpp-tests
   tests/pipestream.cc
   )
 
-target_compile_features(pickle-cpp-tests PRIVATE cxx_std_17)
-
 target_link_libraries(pickle-cpp-tests
-  PRIVATE pickle-cpp
-  PRIVATE catchorg::catch2
-  PRIVATE Threads::Threads
+  PRIVATE
+    pickle::cpp
+    pickle::settings
+    catchorg::catch2
+    Threads::Threads
   )
 
 target_include_directories(pickle-cpp-tests

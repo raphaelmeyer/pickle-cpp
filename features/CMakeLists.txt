@@ -22,5 +22,7 @@ add_executable(example-pickle
   )
 
 target_link_libraries(example-pickle
-  PRIVATE pickle-cpp
+  PRIVATE
+    pickle::cpp
+    pickle::settings
   )
