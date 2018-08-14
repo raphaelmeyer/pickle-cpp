@@ -4,8 +4,6 @@
 
 #include <unistd.h>
 
-#include <thread>
-
 TEST_CASE("data written to a pipe stream should end up in the to pipe", "pipestream") {
   int from[2];
   int to[2];
@@ -14,12 +12,8 @@ TEST_CASE("data written to a pipe stream should end up in the to pipe", "pipestr
 
   std::string const some_data = "some data";
 
-  std::thread test_thread{[&]{
-    pickle::PipeStream testee{to[1], from[0]};
-    testee << some_data;
-  }};
-
-  test_thread.join();
+  pickle::PipeStream testee{to[1], from[0]};
+  testee << some_data << std::flush;
 
   std::array<char, 100> buffer{};
   auto const bytes_read = ::read(to[0], buffer.data(), buffer.size());
@@ -41,12 +35,8 @@ TEST_CASE("data in the pipe should be readable from a pipe stream", "pipestream"
   ::write(from[1], data.data(), data.size());
   ::close(from[1]);
 
-  std::thread test_thread{[&]{
-    pickle::PipeStream testee{to[1], from[0]};
-    std::getline(testee, actual);
-  }};
-
-  test_thread.join();
+  pickle::PipeStream testee{to[1], from[0]};
+  std::getline(testee, actual);
 
   REQUIRE(actual.size() == data.size());
   REQUIRE(actual == data);
