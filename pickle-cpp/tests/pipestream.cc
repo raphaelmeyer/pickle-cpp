@@ -23,9 +23,10 @@ TEST_CASE("data written to a pipe stream should end up in the to pipe", "pipestr
 
   std::array<char, 100> buffer{};
   auto const bytes_read = ::read(to[0], buffer.data(), buffer.size());
+  ::close(to[0]);
+
   REQUIRE(bytes_read == some_data.size());
   REQUIRE(std::string(buffer.begin(), buffer.begin() + bytes_read) == some_data);
-
 }
 
 TEST_CASE("data in the pipe should be readable from a pipe stream", "pipestream") {
@@ -49,5 +50,4 @@ TEST_CASE("data in the pipe should be readable from a pipe stream", "pipestream"
 
   REQUIRE(actual.size() == data.size());
   REQUIRE(actual == data);
-
 }

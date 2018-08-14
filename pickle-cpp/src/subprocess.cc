@@ -1,6 +1,7 @@
 #include "subprocess.h"
 
 #include "error.h"
+#include "pipestream.h"
 
 #include <unistd.h>
 #include <fcntl.h>
@@ -9,8 +10,14 @@
 
 namespace pickle {
 
+Subprocess::Subprocess(pid_t child, int to, int from)
+  : _io(std::make_unique<PipeStream>(to, from))
+{
+
+}
+
 std::iostream & Subprocess::io() {
-  return _io;
+  return *_io;
 }
 
 std::variant<Error, Subprocess> create_subprocess(std::string const & path) {
