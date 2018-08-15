@@ -18,7 +18,7 @@ add_custom_command(
 
 
 add_executable(example-pickle
-  example-pickle/main.cc
+  example-pickle/steps.cc
   )
 
 target_link_libraries(example-pickle

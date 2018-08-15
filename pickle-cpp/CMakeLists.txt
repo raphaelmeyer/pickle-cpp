@@ -1,9 +1,10 @@
 find_package(Threads)
 
 add_library(pickle-cpp
-  src/cucumber.cc
   src/pickle.cc
   src/runner.cc
+  src/step_definition.cc
+  src/main.cc
   )
 add_library(pickle::cpp ALIAS pickle-cpp)
 
