@@ -1,9 +1,8 @@
 #include "pipestream.h"
 
-#include <algorithm>
-#include <memory>
-
 #include <unistd.h>
+
+#include <algorithm>
 
 namespace pickle {
 

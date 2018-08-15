@@ -1,26 +1,13 @@
-#include "subprocess.h"
+#include "forkexec.h"
 
-#include "error.h"
-#include "pipestream.h"
+#include <pickle/os/oserror.h>
 
 #include <unistd.h>
 #include <fcntl.h>
 
-#include <vector>
-
 namespace pickle {
 
-Subprocess::Subprocess(pid_t child, int to, int from)
-  : _io(std::make_unique<PipeStream>(to, from))
-{
-
-}
-
-std::iostream & Subprocess::io() {
-  return *_io;
-}
-
-std::variant<Error, Subprocess> create_subprocess(std::string const & path) {
+std::variant<OSError, std::shared_ptr<Subprocess>> create_subprocess(std::string const & path) {
   auto name = path;
   char * const args[]{name.data(), nullptr, nullptr};
 
@@ -29,13 +16,13 @@ std::variant<Error, Subprocess> create_subprocess(std::string const & path) {
   ::pipe(to);
   ::pipe(from);
 
-    int error_chanel[2];
+  int error_chanel[2];
   ::pipe(error_chanel);
   ::fcntl(error_chanel[1], F_SETFD, fcntl(error_chanel[1], F_GETFD) | FD_CLOEXEC);
 
   auto const pid = ::fork();
   if(pid < 0) {
-    return Error{};
+    return OSError{};
   }
 
   if(pid == 0) {
@@ -59,12 +46,21 @@ std::variant<Error, Subprocess> create_subprocess(std::string const & path) {
     int error = 0;
     auto count = ::read(error_chanel[0], &error, sizeof(int));
     if(count > 0) {
-      return Error{};
+      return OSError{};
     }
   } while(errno == EAGAIN || errno == EINTR);
   ::close(error_chanel[0]);
 
-  return Subprocess{pid, to[1], from[0]};
+  return std::shared_ptr<Subprocess>{ std::make_shared<ForkExec>(pid, to[1], from[0]) };
 };
+
+ForkExec::ForkExec(pid_t child, int to, int from)
+  : _io(std::make_unique<PipeStream>(to, from))
+{
+}
+
+std::iostream & ForkExec::io() const {
+  return *_io;
+}
 
 } // namespace pickle
