@@ -4,7 +4,6 @@ add_library(pickle-cpp
   src/pickle.cc
   src/runner.cc
   src/step_definition.cc
-  src/main.cc
   )
 add_library(pickle::cpp ALIAS pickle-cpp)
 
@@ -16,6 +15,19 @@ target_link_libraries(pickle-cpp
 
 target_include_directories(pickle-cpp
   PUBLIC include
+  )
+
+
+add_library(pickle-main
+  src/main.cc
+  )
+add_library(pickle::main ALIAS pickle-main)
+
+target_link_libraries(pickle-main
+  PRIVATE
+    pickle::settings
+    pickle::cpp
+    pickle::os
   )
 
 
