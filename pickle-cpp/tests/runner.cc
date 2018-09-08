@@ -1,5 +1,7 @@
 #include <catch2/catch.hpp>
 
+#include <nlohmann/json.hpp>
+
 #include "runner.h"
 
 #include <sstream>
@@ -10,8 +12,6 @@ TEST_CASE("runner should send a start command right after starting", "runner") {
   pickle::Runner testee{};
   testee.run(pickle_runner);
 
-  auto const expected = R"json({ "type": "start" }
-)json";
-
-  REQUIRE(pickle_runner.str() == expected);
+  auto const actual = nlohmann::json::parse(pickle_runner.str());
+  REQUIRE(actual["type"] == "start");
 }

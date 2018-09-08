@@ -40,6 +40,7 @@ target_link_libraries(pickle-cpp-tests
   PRIVATE
     pickle::settings
     pickle::cpp
+    nlohmann::json
     catchorg::catch2
     Threads::Threads
   )
