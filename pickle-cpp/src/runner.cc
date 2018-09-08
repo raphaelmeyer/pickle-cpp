@@ -1,10 +1,17 @@
 #include "runner.h"
 
+#include <nlohmann/json.hpp>
+
 namespace pickle {
 
 void Runner::run(std::iostream & pickle_runner) {
-  pickle_runner << R"json({ "type": "start" }
-)json";
+  using namespace nlohmann;
+  pickle_runner << R"({
+    "type": "start",
+    "featuresConfig": {
+      "filters": {}
+    }
+})"_json;
 }
 
 } // namespace pickle
