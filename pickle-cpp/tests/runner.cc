@@ -6,9 +6,6 @@
 
 #include <sstream>
 
-// TODO
-// - commands should be on a single line
-
 TEST_CASE("runner should send a start command right after starting", "runner") {
   std::stringstream pickle_runner{};
 
