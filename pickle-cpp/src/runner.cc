@@ -9,8 +9,11 @@ void Runner::run(std::iostream & pickle_runner) {
   pickle_runner << R"({
     "type": "start",
     "featuresConfig": {
-      "filters": {}
-    }
+      "filters": {},
+      "order": {}
+    },
+    "runtimeConfig": {},
+    "supportCodeConfig": {}
 })"_json;
 }
 
