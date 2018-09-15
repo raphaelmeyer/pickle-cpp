@@ -4,9 +4,12 @@
 
 namespace pickle {
 
+Runner::Runner(std::string feature_path) : _feature_path(std::move(feature_path)) {
+}
+
 void Runner::run(std::iostream & pickle_runner) {
   using namespace nlohmann;
-  pickle_runner << R"({
+  auto start = R"({
     "type": "start",
     "featuresConfig": {
       "filters": {},
@@ -15,6 +18,10 @@ void Runner::run(std::iostream & pickle_runner) {
     "runtimeConfig": {},
     "supportCodeConfig": {}
 })"_json;
+
+  start["featuresConfig"]["absolutePaths"] = {_feature_path};
+
+  pickle_runner << start;
 }
 
 } // namespace pickle
