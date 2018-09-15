@@ -40,8 +40,10 @@ TEST_CASE("start command should specify path to features", "runner") {
   testee.run(pickle_runner);
 
   auto const actual = nlohmann::json::parse(pickle_runner.str());
-  auto const path = actual["featuresConfig"].find("absolutePaths");
+  auto const config = actual["featuresConfig"];
+  auto const path = config.find("absolutePaths");
 
+  REQUIRE(path != config.end());
   REQUIRE(path->size() == 1);
   REQUIRE(path->at(0) == expected_path);
 }
